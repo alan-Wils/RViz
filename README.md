@@ -22,7 +22,23 @@ Use the RViz tool **2D Nav Goal** to click a destination. Nav2 will plan and dri
    sudo apt install ros-${ROS_DISTRO}-slam-toolbox ros-${ROS_DISTRO}-nav2-bringup ros-${ROS_DISTRO}-rplidar-ros
    ```
 
-2. Place the files from this repo into your ROS 2 workspace (e.g., `~/ros2_ws/src/rviz_click_nav`).
+2. Place the files from this repo into your ROS 2 workspace (e.g., `~/ros2_ws/src/rviz_click_nav`). A typical layout looks like:
+
+   ```text
+   ros2_ws/
+     src/
+       rviz_click_nav/
+         package.xml            # create a minimal package manifest
+         setup.py / setup.cfg    # standard Python package metadata
+         resource/               # optional, can hold package marker file
+         launch/
+           click_to_navigate.launch.py
+         scripts/
+           lidar_tf_broadcaster.py
+         README.md
+   ```
+
+   You can also drop the two Python files directly under an existing package and add execution permissions to `lidar_tf_broadcaster.py` (`chmod +x`). The launch file will still generate `~/slam_rviz_config.rviz` at runtime.
 
 3. Build the workspace and source the overlay:
    ```bash
